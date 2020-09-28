@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package techschool.pcbook;
+
+option go_package = "/pb";
+
+import "memory_message.proto";
+
+message CPU {
+  // Brand of the CPU, Intel, AMD...
+  string brand = 1;
+  // Name of the CPU
+  string name = 2;
+  uint32 number_cores = 3;
+  uint32 number_threads = 4;
+  float min_ghz = 5;
+  float max_ghz = 6;
+}
+
+message GPU {
+  // Brand of the CPU, Intel, AMD...
+  string brand = 1;
+  // Name of the CPU
+  string name = 2;
+  float min_ghz = 3;
+  float max_ghz = 4;
+  // Memory?
+  Memory memory = 5;
+}

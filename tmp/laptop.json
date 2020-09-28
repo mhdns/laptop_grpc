@@ -1,0 +1,72 @@
+{
+ "id": "f01d550c-4e88-4e6c-86b2-b8215acf62c0",
+ "brand": "Lenovo",
+ "name": "Thinkpad X1",
+ "cpu": {
+  "brand": "Intel",
+  "name": "Core i9-9980HK",
+  "number_cores": 3,
+  "number_threads": 6,
+  "min_ghz": 3.2398882,
+  "max_ghz": 3.6332061
+ },
+ "ram": {
+  "value": 63,
+  "unit": "GIGABYTE"
+ },
+ "gpus": [
+  {
+   "brand": "Nvidia",
+   "name": "GTX 1660-Ti",
+   "min_ghz": 1.340058,
+   "max_ghz": 1.5865154,
+   "memory": {
+    "value": 5,
+    "unit": "GIGABYTE"
+   }
+  },
+  {
+   "brand": "AMD",
+   "name": "RX 590",
+   "min_ghz": 1.0635077,
+   "max_ghz": 1.3601993,
+   "memory": {
+    "value": 4,
+    "unit": "GIGABYTE"
+   }
+  }
+ ],
+ "storages": [
+  {
+   "driver": "HDD",
+   "memory": {
+    "value": 3,
+    "unit": "TERABYTE"
+   }
+  },
+  {
+   "driver": "SSD",
+   "memory": {
+    "value": 558,
+    "unit": "GIGABYTE"
+   }
+  }
+ ],
+ "screen": {
+  "size_inch": 15.9862,
+  "resolution": {
+   "width": 5072,
+   "height": 2853
+  },
+  "panel": "IPS",
+  "multitouch": false
+ },
+ "keyboard": {
+  "layout": "QWERTY",
+  "backlit": false
+ },
+ "weight_kg": 1.6947083748768224,
+ "price_usd": 1718.3075277914363,
+ "release_year": 2019,
+ "updated_at": "2020-08-20T08:26:15.212710Z"
+}
