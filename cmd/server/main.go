@@ -51,7 +51,7 @@ func main() {
 		log.Fatal("unable to seed users")
 	}
 
-	jwtManager := service.NewJWTManager("champion", 2*time.Minute)
+	jwtManager := service.NewJWTManager("champion", time.Hour)
 	authSever := service.NewAuthServer(userStore, jwtManager)
 
 	laptopStore := service.NewInMemoryLaptopStore()
