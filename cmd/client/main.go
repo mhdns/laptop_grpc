@@ -5,6 +5,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"grpc_youtube_tutorial/client"
 	"grpc_youtube_tutorial/pb"
 	"grpc_youtube_tutorial/sample"
 	"io"
@@ -151,17 +152,49 @@ func testUploadImage(laptopClient pb.LaptopServiceClient) {
 	uploadImage(laptopClient, laptop.GetId(), "tmp/laptop.jpg")
 }
 
+const (
+	username        = "admin1"
+	password        = "secret"
+	refreshDuration = time.Minute
+)
+
+func authMethods() map[string]bool {
+	const laptopServicePath = "/techschool.pcbook.LaptopService/"
+
+	return map[string]bool{
+		laptopServicePath + "CreateLaptop": true,
+		laptopServicePath + "UploadImage":  true,
+		laptopServicePath + "RateLaptop":   true,
+	}
+}
+
 func main() {
 	serverAddr := flag.String("address", "", "the server address")
 	flag.Parse()
 	log.Printf("dial server %s", *serverAddr)
 
-	conn, err := grpc.Dial(*serverAddr, grpc.WithInsecure())
+	cc1, err := grpc.Dial(*serverAddr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("unable to connect: %v", err)
 	}
 
-	laptopClient := pb.NewLaptopServiceClient(conn)
+	authClient := client.NewAuthClient(cc1, username, password)
+	interceptor, err := client.NewAuthInterceptor(authClient, authMethods(), refreshDuration)
+	if err != nil {
+		log.Fatal("unable to create interceptor: ", err)
+	}
+
+	cc2, err := grpc.Dial(
+		*serverAddr,
+		grpc.WithInsecure(),
+		grpc.WithUnaryInterceptor(interceptor.Unary()),
+		grpc.WithStreamInterceptor(interceptor.Stream()),
+	)
+	if err != nil {
+		log.Fatalf("unable to connect: %v", err)
+	}
+
+	laptopClient := pb.NewLaptopServiceClient(cc2)
 
 	testSearchLaptop(laptopClient)
 
